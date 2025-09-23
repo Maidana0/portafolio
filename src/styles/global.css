@@ -1,9 +1,11 @@
 @import "tailwindcss";
-
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 @plugin "daisyui" {
   themes: all;
 }
 
+/*
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -122,6 +124,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+*/
+
 
 /* Base styles for DaisyUI */
 @layer base {
