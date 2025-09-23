@@ -1,0 +1,25 @@
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#6A0DAD",
+    "activityBar.background": "#5A0A91",
+    "activityBar.foreground": "#F4EFFF",
+    "activityBar.inactiveForeground": "#C2A6E7",
+    "activityBarBadge.background": "#9D4EDD",
+    "activityBarBadge.foreground": "#FFFFFF",
+    "commandCenter.border": "#CBB5F7",
+    "sash.hoverBorder": "#8E24AA",
+    "statusBar.background": "#4A148C",
+    "statusBar.foreground": "#EDE7F6",
+    "statusBarItem.hoverBackground": "#6A1B9A",
+    "statusBarItem.remoteBackground": "#311B92",
+    "statusBarItem.remoteForeground": "#EDE7F6",
+    "titleBar.activeBackground": "#512DA8",
+    "titleBar.activeForeground": "#FFFFFF",
+    "titleBar.inactiveBackground": "#4527A0",
+    "titleBar.inactiveForeground": "#C2A6E7"
+  },
+  "github.copilot.chat.scopeSelection": true
+}
