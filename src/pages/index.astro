@@ -1,15 +1,51 @@
 ---
-import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-  <Welcome />
-  <div class="p-8 bg-primary container h-screen mx-auto text-white">
-    <h1 class="text-3xl font-bold underline">Hello world!</h1>
-    <button class="btn btn-secondary">Secondary</button>
+  <div class="p-6">
+    <div class="max-w-4xl mx-auto">
+      <section class="text-center py-12">
+        <h1 class="text-4xl font-bold mb-4">Franco Maidana</h1>
+        <h2 class="text-xl text-muted-foreground mb-6">Frontend Developer</h2>
+        <p class="text-lg leading-relaxed max-w-2xl mx-auto mb-8">
+          Desarrollador frontend especializado en React, TypeScript y Astro.
+          Apasionado por crear experiencias web excepcionales con código limpio
+          y mantenible.
+        </p>
+        <div class="flex gap-4 justify-center">
+          <a
+            href="/projects"
+            class="bg-primary text-primary-foreground px-6 py-2 rounded-md hover:bg-primary/90"
+          >
+            Ver proyectos
+          </a>
+          <a
+            href="/contact"
+            class="border border-input px-6 py-2 rounded-md hover:bg-accent"
+          >
+            Contactar
+          </a>
+        </div>
+      </section>
+
+      <section class="py-12">
+        <h3 class="text-2xl font-bold text-center mb-8">Tecnologías</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="text-center p-4 rounded-lg border">
+            <h4 class="font-medium">React</h4>
+          </div>
+          <div class="text-center p-4 rounded-lg border">
+            <h4 class="font-medium">TypeScript</h4>
+          </div>
+          <div class="text-center p-4 rounded-lg border">
+            <h4 class="font-medium">Astro</h4>
+          </div>
+          <div class="text-center p-4 rounded-lg border">
+            <h4 class="font-medium">TailwindCSS</h4>
+          </div>
+        </div>
+      </section>
+    </div>
   </div>
 </Layout>
