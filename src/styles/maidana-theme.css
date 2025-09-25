@@ -1,0 +1,44 @@
+@plugin "daisyui/theme" {
+  name: "maidana";
+  default: false;
+  prefersdark: false;
+  color-scheme: "dark";
+
+  --color-base-100: oklch(25% 0.04 300);  /* fondo principal */
+  --color-base-200: oklch(20% 0.04 300);
+  --color-base-300: oklch(15% 0.03 300);
+  --color-base-content: oklch(95% 0.02 300);
+
+  --color-primary: oklch(53% 0.24 300);   /* violeta medio (ej. #6A0DAD) */
+  --color-primary-content: oklch(96% 0.02 300);
+
+  --color-secondary: oklch(65% 0.2 320);  /* violeta más claro/lila */
+  --color-secondary-content: oklch(96% 0.03 320);
+
+  --color-accent: oklch(70% 0.18 270);    /* acento más azulado-violeta */
+  --color-accent-content: oklch(20% 0.05 270);
+
+  --color-neutral: oklch(18% 0.02 300);
+  --color-neutral-content: oklch(92% 0.02 300);
+
+  --color-info: oklch(72% 0.17 250);
+  --color-info-content: oklch(25% 0.07 250);
+
+  --color-success: oklch(72% 0.17 160);  /* verde-azulado */
+  --color-success-content: oklch(20% 0.08 160);
+
+  --color-warning: oklch(80% 0.18 80);   /* amarillo cálido */
+  --color-warning-content: oklch(30% 0.10 80);
+
+  --color-error: oklch(70% 0.20 20);     /* rojo intenso */
+  --color-error-content: oklch(30% 0.12 20);
+
+  --radius-selector: 0.5rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
