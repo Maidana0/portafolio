@@ -1,0 +1,26 @@
+---
+// src/components/resume/Navigation.astro
+/**
+ * Renders a set of navigation links to allow users to jump to different sections of the resume.
+ * This component is designed to be placed at the top of the resume for easy access.
+ */
+
+const sections = [
+  { name: "Perfil", href: "#profile" },
+  { name: "Experiencia", href: "#experience" },
+  { name: "Educación", href: "#education" },
+  { name: "Habilidades", href: "#skills" },
+  { name: "Competencias", href: "#soft-skills" },
+];
+---
+
+<nav class="flex justify-center flex-wrap gap-x-4 gap-y-2 mb-8">
+  {sections.map(section => (
+    <a
+      href={section.href}
+      class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
+    >
+      {section.name}
+    </a>
+  ))}
+</nav>

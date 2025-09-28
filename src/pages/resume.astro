@@ -5,9 +5,12 @@ import Header from "../components/resume/Header.astro";
 import Section from "../components/resume/Section.astro";
 import EducationItem from "../components/resume/EducationItem.astro";
 import ExperienceItem from "../components/resume/ExperienceItem.astro";
-import Pill from "../components/resume/Pill.astro";
+import Navigation from "../components/resume/Navigation.astro";
+import SkillPill from "../components/resume/SkillPill.tsx"; // Import the new React component
+import { TooltipProvider } from "@components/ui/tooltip";
 
-// --- Resume Data ---
+// --- Data & Color Definitions ---
+
 const personalInfo = {
   name: "Franco Gabriel Maidana",
   role: "Desarrollador Full Stack",
@@ -41,7 +44,6 @@ const education = [
   },
 ];
 
-// Refactored descriptions to use arrays for proper list formatting
 const experience = [
   {
     role: "Cotzia: Gestión de materia prima y costos",
@@ -68,7 +70,17 @@ const experience = [
   },
 ];
 
-const skills: Record<string, { name: string; icon: string }[]> = {
+// Color palette definition for skill categories
+const SKILL_COLORS = {
+  Frontend: "bg-blue-100 text-blue-800 hover:bg-blue-200",
+  Backend: "bg-green-100 text-green-800 hover:bg-green-200",
+  "Bases de Datos": "bg-yellow-100 text-yellow-800 hover:bg-yellow-200",
+  Diseño: "bg-purple-100 text-purple-800 hover:bg-purple-200",
+  Metodologías: "bg-pink-100 text-pink-800 hover:bg-pink-200",
+  Herramientas: "bg-gray-100 text-gray-800 hover:bg-gray-200",
+};
+
+const skills = {
   Frontend: [
     { name: "Next.js", icon: "nextjs" }, { name: "React", icon: "react" },
     { name: "Vite", icon: "vite" }, { name: "TailwindCSS", icon: "tailwind" },
@@ -107,12 +119,13 @@ const softSkills = [
 <Layout>
   <div class="p-6 max-w-4xl mx-auto space-y-8">
     <Header {...personalInfo} />
+    <Navigation />
 
-    <Section title="Perfil Profesional" icon="user">
+    <Section id="profile" title="Perfil Profesional" icon="user">
       <p class="text-sm text-muted-foreground">{professionalProfile}</p>
     </Section>
 
-    <Section title="Experiencia en Equipo y Proyectos Relevantes" icon="briefcase">
+    <Section id="experience" title="Experiencia en Equipo y Proyectos Relevantes" icon="briefcase">
       {experience.map(item => (
         <ExperienceItem role={item.role} company={item.company} date={item.date}>
           <ul class="list-disc list-inside space-y-1">
@@ -124,25 +137,49 @@ const softSkills = [
       ))}
     </Section>
 
-    <Section title="Educación" icon="graduation">
+    <Section id="education" title="Educación" icon="graduation">
       {education.map(item => <EducationItem {...item} />)}
     </Section>
 
-    <Section title="Habilidades Técnicas" icon="code">
-      {Object.entries(skills).map(([category, skillList]) => (
-        <div>
-          <h4 class="font-medium text-sm mb-2">{category}</h4>
-          <div class="flex flex-wrap gap-2">
-            {skillList.map(skill => <Pill icon={skill.icon}>{skill.name}</Pill>)}
-          </div>
+    <Section id="skills" title="Habilidades Técnicas" icon="code">
+      <TooltipProvider client:load>
+        <div class="space-y-4">
+          {Object.entries(skills).map(([category, skillList]) => (
+            <div>
+              <h4 class="font-medium text-sm mb-2">{category}</h4>
+              <div class="flex flex-wrap gap-2">
+                {skillList.map(skill => (
+                  <SkillPill
+                    client:visible
+                    name={skill.name}
+                    icon={skill.icon}
+                    colorClasses={SKILL_COLORS[category]}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      </TooltipProvider>
     </Section>
 
-    <Section title="Competencias Blandas" icon="users">
+    <Section id="soft-skills" title="Competencias Blandas" icon="users">
       <ul class="list-disc list-inside text-sm text-muted-foreground space-y-1">
         {softSkills.map(skill => <li>{skill}</li>)}
       </ul>
     </Section>
   </div>
 </Layout>
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>
