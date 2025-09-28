@@ -1,0 +1,21 @@
+---
+// src/components/resume/Section.astro
+/**
+ * A reusable component to create a consistent section layout for the resume.
+ * It displays a title and provides a slot for the section's content.
+ *
+ * @param {string} title - The title to be displayed for the section.
+ */
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<section class="space-y-6">
+  <h2 class="text-xl font-semibold mb-3">{title}</h2>
+  <div class="border-l-2 border-primary pl-4 space-y-4">
+    <slot />
+  </div>
+</section>

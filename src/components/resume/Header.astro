@@ -1,0 +1,54 @@
+---
+// src/components/resume/Header.astro
+/**
+ * Displays the main header for the resume, including personal details and contact information.
+ * It's designed to be data-driven, receiving all necessary information via props.
+ */
+
+import { Mail, Phone, Github, Linkedin, MapPin } from 'lucide-react';
+
+interface Props {
+  name: string;
+  role: string;
+  location: string;
+  email: string;
+  github: string;
+  linkedin: string;
+  phone: string;
+}
+
+const { name, role, location, email, github, linkedin, phone } = Astro.props;
+---
+
+<header class="flex flex-col md:flex-row justify-between items-start mb-10">
+  <!-- Left Column: Name and Role -->
+  <div class="mb-4 md:mb-0">
+    <h1 class="text-4xl font-bold">{name}</h1>
+    <p class="text-lg text-muted-foreground">{role}</p>
+    <p class="text-sm text-muted-foreground flex items-center mt-2">
+      <MapPin class="inline-block w-4 h-4 mr-2" />
+      {location}
+    </p>
+  </div>
+
+  <!-- Right Column: Contact Info -->
+  <div class="text-sm text-right">
+    <a href=`mailto:${email}` class="flex items-center justify-end mb-1 hover:text-primary">
+      {email}
+      <Mail class="inline-block w-4 h-4 ml-2" />
+    </a>
+    <a href={github} target="_blank" rel="noopener noreferrer" class="flex items-center justify-end mb-1 hover:text-primary">
+      GitHub
+      <Github class="inline-block w-4 h-4 ml-2" />
+    </a>
+    <a href={linkedin} target="_blank" rel="noopener noreferrer" class="flex items-center justify-end mb-1 hover:text-primary">
+      LinkedIn
+      <Linkedin class="inline-block w-4 h-4 ml-2" />
+    </a>
+    <p class="flex items-center justify-end">
+      {phone}
+      <Phone class="inline-block w-4 h-4 ml-2" />
+    </p>
+  </div>
+</header>
+<hr class="my-6" />

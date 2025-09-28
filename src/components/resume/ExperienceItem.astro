@@ -1,0 +1,30 @@
+---
+// src/components/resume/ExperienceItem.astro
+/**
+ * Renders a single experience or project entry for the resume.
+ *
+ * @param {string} role - The role or project name.
+ * @param {string} company - The company or context (e.g., "Organización Simulada").
+ * @param {string} date - The date range of the experience.
+ */
+interface Props {
+  role: string;
+  company: string;
+  date: string;
+}
+
+const { role, company, date } = Astro.props;
+---
+
+<div>
+  <div class="flex justify-between items-start mb-1">
+    <div>
+      <h3 class="font-medium text-base">{role}</h3>
+      <p class="text-sm text-muted-foreground">{company}</p>
+    </div>
+    <p class="text-sm text-muted-foreground text-right min-w-[100px]">{date}</p>
+  </div>
+  <div class="text-sm text-muted-foreground">
+    <slot />
+  </div>
+</div>

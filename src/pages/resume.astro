@@ -1,21 +1,137 @@
 ---
+// src/pages/resume.astro
 import Layout from "../layouts/Layout.astro";
+import Header from "../components/resume/Header.astro";
+import Section from "../components/resume/Section.astro";
+import EducationItem from "../components/resume/EducationItem.astro";
+import ExperienceItem from "../components/resume/ExperienceItem.astro";
+import Pill from "../components/resume/Pill.astro";
+
+// --- Resume Data ---
+// All content is defined here to make it easy to update.
+// This data is then passed to the reusable components below.
+
+const personalInfo = {
+  name: "Franco Gabriel Maidana",
+  role: "Desarrollador Full Stack",
+  location: "La Matanza, Buenos Aires, Argentina",
+  email: "franco_maidana07@hotmail.com",
+  github: "#", // Placeholder URL
+  linkedin: "#", // Placeholder URL
+  phone: "(+54) 9 11 2480-4777",
+};
+
+const professionalProfile =
+  "Estudiante de la Tecnicatura en Desarrollo Web (UNLaM). Experiencia en proyectos académicos, colaborativos y personales utilizando Next.js, React, TypeScript, Node.js, Express, Prisma/Sequelize y TailwindCSS. Participe en equipos multidisciplinares bajo metodología SCRUM, aportando en el diseño, desarrollo y documentación de aplicaciones web. Busco incorporarme a un equipo que permita seguir creciendo profesionalmente y aportar mis conocimientos en el desarrollo de software integral.";
+
+const education = [
+  {
+    degree: "Tecnicatura En Web",
+    institution: "Universidad Nacional De La Matanza",
+    date: "2024 - Presente",
+    details: "Cantidad de materias aprobadas: 7/25",
+  },
+  {
+    degree: "Desarrollador Web Full Stack",
+    institution: "Coderhouse",
+    date: "2022 - 2024",
+    details: "Desarrollo Web, JavaScript, React. Backend con JavaScript y TypeScript (Node.js / Express). Python / Django.",
+  },
+  {
+    degree: "Bachiller En Economía Y Administración",
+    institution: "Inst. Santa Teresa De J.",
+    date: "2013 - 2018",
+  },
+];
+
+const experience = [
+  {
+    role: "Cotzia: Gestión de materia prima y costos",
+    company: "Organización Simulada - Foo Talent Group",
+    date: "2025",
+    description: "Gestión de materia prima y costos de laboratorio. (Next.js 15, TypeScript, Tailwind, Shadcn, Zustand, RHF)",
+  },
+  {
+    role: "Proyectos Colaborativos",
+    company: "Organización Simulada – No Country",
+    date: "2024",
+    description: `
+      • <strong>PopcornPass:</strong> Plataforma de venta de entradas de cine. (Next.js, TypeScript, Zustand, RHF, Material UI, Figma)<br/>
+      • <strong>CashFly:</strong> App de préstamos e inversiones. (Vite, CSS, Figma)<br/>
+      • <strong>GoEvent:</strong> API de gestión de eventos. (Node.js, Express, Sequelize, middlewares)<br/>
+      • <strong>AdoPet:</strong> App para adopción de mascotas. (Next.js, TS, Tailwind)
+    `,
+  },
+  {
+    role: "MaidaVision (Proyecto Personal)",
+    company: "En progreso",
+    date: "Actual",
+    description: "App para gestión de películas/series con APIs externas (TheMovieDB, YouTube). Autenticación con NextAuth (Google/GitHub) y base de datos con Prisma + SQLite. Validaciones con Zod + RHF, manejo de estados globales con Zustand. Interfaz desarrollada en Tailwind + Shadcn.",
+  },
+];
+
+const skills = {
+  Frontend: ["Next.js", "React", "Vite", "TailwindCSS", "Shadcn/UI", "Material UI"],
+  Backend: ["Node.js", "Express", "NestJS (básico)"],
+  "Bases de Datos": ["SQL", "SQLite", "Sequelize", "Prisma", "MongoDB"],
+  Diseño: ["Figma", "Styled Components", "Sass"],
+  Metodologías: ["SCRUM", "MVC", "Introducción a DDD"],
+  Herramientas: ["Git/GitHub", "Postman", "ThunderClient"],
+  Idiomas: ["Inglés técnico básico (lectura y documentación)"],
+};
+
+const softSkills = [
+  "Trabajo en equipo en entornos ágiles",
+  "Documentación clara y seguimiento de tareas",
+  "Adaptación rápida a nuevas tecnologías",
+  "Orientación a buenas prácticas de código",
+];
 ---
 
 <Layout>
-  <div class="p-6">
-    <h1 class="text-3xl font-bold mb-6">Curriculum Vitae</h1>
-    <div class="space-y-6">
-      <section>
-        <h2 class="text-xl font-semibold mb-3">Experiencia</h2>
-        <div class="space-y-4">
-          <div class="border-l-2 border-primary pl-4">
-            <h3 class="font-medium">Frontend Developer</h3>
-            <p class="text-sm text-muted-foreground">Empresa • 2023 - Presente</p>
-            <p class="text-sm mt-2">Descripción de la experiencia</p>
+  <div class="p-6 max-w-4xl mx-auto">
+    <!-- Header -->
+    <Header {...personalInfo} />
+
+    <!-- Professional Profile -->
+    <Section title="Perfil Profesional">
+      <p class="text-sm text-muted-foreground">{professionalProfile}</p>
+    </Section>
+
+    <!-- Experience -->
+    <Section title="Experiencia en Equipo y Proyectos Relevantes">
+      {experience.map(item => (
+        <ExperienceItem role={item.role} company={item.company} date={item.date}>
+          <p set:html={item.description} />
+        </ExperienceItem>
+      ))}
+    </Section>
+
+    <!-- Education -->
+    <Section title="Educación">
+      {education.map(item => (
+        <EducationItem {...item} />
+      ))}
+    </Section>
+
+    <!-- Technical Skills -->
+    <Section title="Habilidades Técnicas">
+      {Object.entries(skills).map(([category, skillList]) => (
+        <div>
+          <h4 class="font-medium text-sm mb-2">{category}</h4>
+          <div class="flex flex-wrap gap-2">
+            {skillList.map(skill => <Pill>{skill}</Pill>)}
           </div>
         </div>
-      </section>
-    </div>
+      ))}
+    </Section>
+
+    <!-- Soft Skills -->
+    <Section title="Competencias Blandas">
+      <ul class="list-disc list-inside text-sm text-muted-foreground space-y-1">
+        {softSkills.map(skill => <li>{skill}</li>)}
+      </ul>
+    </Section>
+
   </div>
 </Layout>
