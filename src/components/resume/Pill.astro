@@ -2,10 +2,20 @@
 // src/components/resume/Pill.astro
 /**
  * A small, styled component to display a skill or technology tag.
- * It's designed to be used within the skills section of the resume.
+ * It now accepts an optional 'icon' prop (a string key) to display an icon next to the skill name.
+ *
+ * @param {string} [icon] - An optional icon name.
  */
+import Icon from './Icon.astro';
+
+interface Props {
+  icon?: string;
+}
+
+const { icon } = Astro.props;
 ---
 
-<div class="flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium leading-5 text-primary">
+<div class="flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium leading-5 text-primary gap-x-2">
+  {icon && <Icon name={icon} />}
   <slot />
 </div>

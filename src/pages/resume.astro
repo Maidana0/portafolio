@@ -70,14 +70,41 @@ const experience = [
   },
 ];
 
-const skills = {
-  Frontend: ["Next.js", "React", "Vite", "TailwindCSS", "Shadcn/UI", "Material UI"],
-  Backend: ["Node.js", "Express", "NestJS (básico)"],
-  "Bases de Datos": ["SQL", "SQLite", "Sequelize", "Prisma", "MongoDB"],
-  Diseño: ["Figma", "Styled Components", "Sass"],
-  Metodologías: ["SCRUM", "MVC", "Introducción a DDD"],
-  Herramientas: ["Git/GitHub", "Postman", "ThunderClient"],
-  Idiomas: ["Inglés técnico básico (lectura y documentación)"],
+const skills: Record<string, { name: string; icon: string }[]> = {
+  Frontend: [
+    { name: "Next.js", icon: "nextjs" },
+    { name: "React", icon: "react" },
+    { name: "Vite", icon: "vite" },
+    { name: "TailwindCSS", icon: "tailwind" },
+    { name: "Shadcn/UI", icon: "shadcn" },
+    { name: "Material UI", icon: "material-ui" },
+  ],
+  Backend: [
+    { name: "Node.js", icon: "nodejs" },
+    { name: "Express", icon: "express" },
+    { name: "NestJS (básico)", icon: "nestjs" },
+  ],
+  "Bases de Datos": [
+    { name: "SQL", icon: "sql" },
+    { name: "SQLite", icon: "sqlite" },
+    { name: "Sequelize", icon: "sequelize" },
+    { name: "Prisma", icon: "prisma" },
+    { name: "MongoDB", icon: "mongodb" },
+  ],
+  Diseño: [
+    { name: "Figma", icon: "figma" },
+    { name: "Styled Components", icon: "styled-components" },
+    { name: "Sass", icon: "sass" },
+  ],
+  Metodologías: [
+    { name: "SCRUM", icon: "scrum" },
+    { name: "MVC", icon: "mvc" },
+  ],
+  Herramientas: [
+    { name: "Git/GitHub", icon: "git" },
+    { name: "Postman", icon: "postman" },
+    { name: "ThunderClient", icon: "thunderclient" },
+  ],
 };
 
 const softSkills = [
@@ -120,7 +147,11 @@ const softSkills = [
         <div>
           <h4 class="font-medium text-sm mb-2">{category}</h4>
           <div class="flex flex-wrap gap-2">
-            {skillList.map(skill => <Pill>{skill}</Pill>)}
+            {skillList.map(skill => (
+              <Pill icon={skill.icon}>
+                {skill.name}
+              </Pill>
+            ))}
           </div>
         </div>
       ))}

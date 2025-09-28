@@ -1,0 +1,58 @@
+---
+// src/components/resume/Icon.astro
+/**
+ * This component acts as a dispatcher to correctly render React icons
+ * within an Astro project. By explicitly rendering each component and its
+ * client directive in the template, we ensure Astro's build process
+ * can see and correctly hydrate each icon.
+ *
+ * @param {string} name - The key of the icon to render.
+ */
+import {
+  FaReact, FaNodeJs, FaDatabase, FaFigma, FaSass, FaGitAlt, FaGithub
+} from "react-icons/fa";
+import {
+  SiNextdotjs, SiVite, SiTailwindcss, SiMui, SiExpress, SiNestjs,
+  SiSqlite, SiSequelize, SiPrisma, SiMongodb, SiStyledcomponents,
+  SiPostman, SiShadcnui
+} from "react-icons/si";
+import { DiScrum } from "react-icons/di";
+import { VscTypeHierarchy } from "react-icons/vsc";
+import { Bolt } from "lucide-react";
+
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+
+// The class can be common, but the client:* directive cannot.
+const commonProps = {
+  class: "size-4",
+};
+---
+
+{/* The client:visible directive MUST be applied directly to the component for the Astro compiler to detect it. */}
+{name === 'react' && <FaReact {...commonProps} client:visible />}
+{name === 'nextjs' && <SiNextdotjs {...commonProps} client:visible />}
+{name === 'vite' && <SiVite {...commonProps} client:visible />}
+{name === 'tailwind' && <SiTailwindcss {...commonProps} client:visible />}
+{name === 'material-ui' && <SiMui {...commonProps} client:visible />}
+{name === 'shadcn' && <SiShadcnui {...commonProps} client:visible />}
+{name === 'nodejs' && <FaNodeJs {...commonProps} client:visible />}
+{name === 'express' && <SiExpress {...commonProps} client:visible />}
+{name === 'nestjs' && <SiNestjs {...commonProps} client:visible />}
+{name === 'sql' && <FaDatabase {...commonProps} client:visible />}
+{name === 'sqlite' && <SiSqlite {...commonProps} client:visible />}
+{name === 'sequelize' && <SiSequelize {...commonProps} client:visible />}
+{name === 'prisma' && <SiPrisma {...commonProps} client:visible />}
+{name === 'mongodb' && <SiMongodb {...commonProps} client:visible />}
+{name === 'figma' && <FaFigma {...commonProps} client:visible />}
+{name === 'styled-components' && <SiStyledcomponents {...commonProps} client:visible />}
+{name === 'sass' && <FaSass {...commonProps} client:visible />}
+{name === 'git' && <FaGitAlt {...commonProps} client:visible />}
+{name === 'github' && <FaGithub {...commonProps} client:visible />}
+{name === 'postman' && <SiPostman {...commonProps} client:visible />}
+{name === 'thunderclient' && <Bolt {...commonProps} client:visible />}
+{name === 'scrum' && <DiScrum {...commonProps} client:visible />}
+{name === 'mvc' && <VscTypeHierarchy {...commonProps} client:visible />}
