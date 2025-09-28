@@ -1,12 +1,14 @@
 ---
 // src/components/resume/ExperienceItem.astro
 /**
- * Renders a single experience or project entry for the resume.
+ * Renders a single experience or project entry for the resume using a timeline design.
  *
  * @param {string} role - The role or project name.
- * @param {string} company - The company or context (e.g., "Organización Simulada").
+ * @param {string} company - The company or context.
  * @param {string} date - The date range of the experience.
  */
+import Badge from './Badge.astro';
+
 interface Props {
   role: string;
   company: string;
@@ -16,15 +18,26 @@ interface Props {
 const { role, company, date } = Astro.props;
 ---
 
-<div>
-  <div class="flex justify-between items-start mb-1">
-    <div>
-      <h3 class="font-medium text-base">{role}</h3>
-      <p class="text-sm text-muted-foreground">{company}</p>
-    </div>
-    <p class="text-sm text-muted-foreground text-right min-w-[100px]">{date}</p>
+<div class="timeline-item relative flex items-start pb-4">
+  <!-- The vertical line that connects the badges -->
+  <div class="timeline-line absolute top-0 left-[5.5px] h-full w-px bg-primary/50"></div>
+
+  <!-- Badge positioned on the timeline -->
+  <div class="flex-shrink-0 pt-1.5">
+    <Badge />
   </div>
-  <div class="text-sm text-muted-foreground">
-    <slot />
+
+  <!-- Content -->
+  <div class="ml-4 flex-grow">
+    <div class="flex justify-between items-start mb-1">
+      <div>
+        <h3 class="font-medium text-base">{role}</h3>
+        <p class="text-sm text-muted-foreground">{company}</p>
+      </div>
+      <p class="text-sm text-muted-foreground text-right min-w-[100px]">{date}</p>
+    </div>
+    <div class="text-sm text-muted-foreground">
+      <slot />
+    </div>
   </div>
 </div>

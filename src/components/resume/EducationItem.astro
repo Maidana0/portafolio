@@ -1,13 +1,15 @@
 ---
 // src/components/resume/EducationItem.astro
 /**
- * Renders a single educational entry for the resume.
+ * Renders a single educational entry for the resume using a timeline design.
  *
  * @param {string} degree - The name of the degree or certification.
  * @param {string} institution - The name of the institution.
  * @param {string} date - The date range of the study period.
  * @param {string} [details] - Optional details, like approved subjects.
  */
+import Badge from './Badge.astro';
+
 interface Props {
   degree: string;
   institution: string;
@@ -18,13 +20,24 @@ interface Props {
 const { degree, institution, date, details } = Astro.props;
 ---
 
-<div>
-  <div class="flex justify-between items-start">
-    <div>
-      <h3 class="font-medium text-base">{degree}</h3>
-      <p class="text-sm text-muted-foreground">{institution}</p>
-      {details && <p class="text-xs text-muted-foreground mt-1">{details}</p>}
+<div class="timeline-item relative flex items-start pb-4">
+  <!-- The vertical line that connects the badges -->
+  <div class="timeline-line absolute top-0 left-[5.5px] h-full w-px bg-primary/50"></div>
+
+  <!-- Badge positioned on the timeline -->
+  <div class="flex-shrink-0 pt-1.5">
+    <Badge />
+  </div>
+
+  <!-- Content -->
+  <div class="ml-4 flex-grow">
+    <div class="flex justify-between items-start">
+      <div>
+        <h3 class="font-medium text-base">{degree}</h3>
+        <p class="text-sm text-muted-foreground">{institution}</p>
+        {details && <p class="text-xs text-muted-foreground mt-1">{details}</p>}
+      </div>
+      <p class="text-sm text-muted-foreground text-right min-w-[100px]">{date}</p>
     </div>
-    <p class="text-sm text-muted-foreground text-right min-w-[100px]">{date}</p>
   </div>
 </div>

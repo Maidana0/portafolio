@@ -9,7 +9,8 @@
  * @param {string} name - The key of the icon to render.
  */
 import {
-  FaReact, FaNodeJs, FaDatabase, FaFigma, FaSass, FaGitAlt, FaGithub
+  FaReact, FaNodeJs, FaDatabase, FaFigma, FaSass, FaGitAlt, FaGithub,
+  FaUser, FaBriefcase, FaGraduationCap, FaCode, FaUsers // Section icons
 } from "react-icons/fa";
 import {
   SiNextdotjs, SiVite, SiTailwindcss, SiMui, SiExpress, SiNestjs,
@@ -33,6 +34,14 @@ const commonProps = {
 ---
 
 {/* The client:visible directive MUST be applied directly to the component for the Astro compiler to detect it. */}
+{/* Section Icons */}
+{name === 'user' && <FaUser {...commonProps} client:visible />}
+{name === 'briefcase' && <FaBriefcase {...commonProps} client:visible />}
+{name === 'graduation' && <FaGraduationCap {...commonProps} client:visible />}
+{name === 'code' && <FaCode {...commonProps} client:visible />}
+{name === 'users' && <FaUsers {...commonProps} client:visible />}
+
+{/* Skill Icons */}
 {name === 'react' && <FaReact {...commonProps} client:visible />}
 {name === 'nextjs' && <SiNextdotjs {...commonProps} client:visible />}
 {name === 'vite' && <SiVite {...commonProps} client:visible />}

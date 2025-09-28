@@ -3,19 +3,40 @@
 /**
  * A reusable component to create a consistent section layout for the resume.
  * It displays a title and provides a slot for the section's content.
+ * Now includes a wrapper and styles to support a timeline design for its children.
  *
  * @param {string} title - The title to be displayed for the section.
+ * @param {string} [icon] - An optional icon name to display next to the title.
  */
+import Icon from './Icon.astro';
+
 interface Props {
   title: string;
+  icon?: string;
 }
 
-const { title } = Astro.props;
+const { title, icon } = Astro.props;
 ---
 
-<section class="space-y-6">
-  <h2 class="text-xl font-semibold mb-3">{title}</h2>
-  <div class="border-l-2 border-primary pl-4 space-y-4">
+<section class="space-y-4">
+  <div class="flex items-center gap-x-3">
+    {icon && <Icon name={icon} />}
+    <h2 class="text-xl font-semibold text-primary">{title}</h2>
+  </div>
+
+  <div class="timeline-container">
     <slot />
   </div>
 </section>
+
+<style>
+  /*
+    This style block targets any element with the .timeline-item class that is a
+    last-child within the .timeline-container. It then hides the .timeline-line
+    within that item. This is a clean way to prevent the timeline from extending
+    past the final entry in a section.
+  */
+  .timeline-container :global(.timeline-item:last-child .timeline-line) {
+    display: none;
+  }
+</style>

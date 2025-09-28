@@ -8,16 +8,13 @@ import ExperienceItem from "../components/resume/ExperienceItem.astro";
 import Pill from "../components/resume/Pill.astro";
 
 // --- Resume Data ---
-// All content is defined here to make it easy to update.
-// This data is then passed to the reusable components below.
-
 const personalInfo = {
   name: "Franco Gabriel Maidana",
   role: "Desarrollador Full Stack",
   location: "La Matanza, Buenos Aires, Argentina",
   email: "franco_maidana07@hotmail.com",
-  github: "#", // Placeholder URL
-  linkedin: "#", // Placeholder URL
+  github: "#",
+  linkedin: "#",
   phone: "(+54) 9 11 2480-4777",
 };
 
@@ -44,65 +41,57 @@ const education = [
   },
 ];
 
+// Refactored descriptions to use arrays for proper list formatting
 const experience = [
   {
     role: "Cotzia: Gestión de materia prima y costos",
     company: "Organización Simulada - Foo Talent Group",
     date: "2025",
-    description: "Gestión de materia prima y costos de laboratorio. (Next.js 15, TypeScript, Tailwind, Shadcn, Zustand, RHF)",
+    description: ["Gestión de materia prima y costos de laboratorio. (Next.js 15, TypeScript, Tailwind, Shadcn, Zustand, RHF)"],
   },
   {
     role: "Proyectos Colaborativos",
     company: "Organización Simulada – No Country",
     date: "2024",
-    description: `
-      • <strong>PopcornPass:</strong> Plataforma de venta de entradas de cine. (Next.js, TypeScript, Zustand, RHF, Material UI, Figma)<br/>
-      • <strong>CashFly:</strong> App de préstamos e inversiones. (Vite, CSS, Figma)<br/>
-      • <strong>GoEvent:</strong> API de gestión de eventos. (Node.js, Express, Sequelize, middlewares)<br/>
-      • <strong>AdoPet:</strong> App para adopción de mascotas. (Next.js, TS, Tailwind)
-    `,
+    description: [
+      "<strong>PopcornPass:</strong> Plataforma de venta de entradas de cine. (Next.js, TypeScript, Zustand, RHF, Material UI, Figma)",
+      "<strong>CashFly:</strong> App de préstamos e inversiones. (Vite, CSS, Figma)",
+      "<strong>GoEvent:</strong> API de gestión de eventos. (Node.js, Express, Sequelize, middlewares)",
+      "<strong>AdoPet:</strong> App para adopción de mascotas. (Next.js, TS, Tailwind)",
+    ],
   },
   {
     role: "MaidaVision (Proyecto Personal)",
     company: "En progreso",
     date: "Actual",
-    description: "App para gestión de películas/series con APIs externas (TheMovieDB, YouTube). Autenticación con NextAuth (Google/GitHub) y base de datos con Prisma + SQLite. Validaciones con Zod + RHF, manejo de estados globales con Zustand. Interfaz desarrollada en Tailwind + Shadcn.",
+    description: ["App para gestión de películas/series con APIs externas (TheMovieDB, YouTube). Autenticación con NextAuth (Google/GitHub) y base de datos con Prisma + SQLite. Validaciones con Zod + RHF, manejo de estados globales con Zustand. Interfaz desarrollada en Tailwind + Shadcn."],
   },
 ];
 
 const skills: Record<string, { name: string; icon: string }[]> = {
   Frontend: [
-    { name: "Next.js", icon: "nextjs" },
-    { name: "React", icon: "react" },
-    { name: "Vite", icon: "vite" },
-    { name: "TailwindCSS", icon: "tailwind" },
-    { name: "Shadcn/UI", icon: "shadcn" },
-    { name: "Material UI", icon: "material-ui" },
+    { name: "Next.js", icon: "nextjs" }, { name: "React", icon: "react" },
+    { name: "Vite", icon: "vite" }, { name: "TailwindCSS", icon: "tailwind" },
+    { name: "Shadcn/UI", icon: "shadcn" }, { name: "Material UI", icon: "material-ui" },
   ],
   Backend: [
-    { name: "Node.js", icon: "nodejs" },
-    { name: "Express", icon: "express" },
+    { name: "Node.js", icon: "nodejs" }, { name: "Express", icon: "express" },
     { name: "NestJS (básico)", icon: "nestjs" },
   ],
   "Bases de Datos": [
-    { name: "SQL", icon: "sql" },
-    { name: "SQLite", icon: "sqlite" },
-    { name: "Sequelize", icon: "sequelize" },
-    { name: "Prisma", icon: "prisma" },
+    { name: "SQL", icon: "sql" }, { name: "SQLite", icon: "sqlite" },
+    { name: "Sequelize", icon: "sequelize" }, { name: "Prisma", icon: "prisma" },
     { name: "MongoDB", icon: "mongodb" },
   ],
   Diseño: [
-    { name: "Figma", icon: "figma" },
-    { name: "Styled Components", icon: "styled-components" },
+    { name: "Figma", icon: "figma" }, { name: "Styled Components", icon: "styled-components" },
     { name: "Sass", icon: "sass" },
   ],
   Metodologías: [
-    { name: "SCRUM", icon: "scrum" },
-    { name: "MVC", icon: "mvc" },
+    { name: "SCRUM", icon: "scrum" }, { name: "MVC", icon: "mvc" },
   ],
   Herramientas: [
-    { name: "Git/GitHub", icon: "git" },
-    { name: "Postman", icon: "postman" },
+    { name: "Git/GitHub", icon: "git" }, { name: "Postman", icon: "postman" },
     { name: "ThunderClient", icon: "thunderclient" },
   ],
 };
@@ -116,53 +105,44 @@ const softSkills = [
 ---
 
 <Layout>
-  <div class="p-6 max-w-4xl mx-auto">
-    <!-- Header -->
+  <div class="p-6 max-w-4xl mx-auto space-y-8">
     <Header {...personalInfo} />
 
-    <!-- Professional Profile -->
-    <Section title="Perfil Profesional">
+    <Section title="Perfil Profesional" icon="user">
       <p class="text-sm text-muted-foreground">{professionalProfile}</p>
     </Section>
 
-    <!-- Experience -->
-    <Section title="Experiencia en Equipo y Proyectos Relevantes">
+    <Section title="Experiencia en Equipo y Proyectos Relevantes" icon="briefcase">
       {experience.map(item => (
         <ExperienceItem role={item.role} company={item.company} date={item.date}>
-          <p set:html={item.description} />
+          <ul class="list-disc list-inside space-y-1">
+            {item.description.map(point => (
+              <li set:html={point} />
+            ))}
+          </ul>
         </ExperienceItem>
       ))}
     </Section>
 
-    <!-- Education -->
-    <Section title="Educación">
-      {education.map(item => (
-        <EducationItem {...item} />
-      ))}
+    <Section title="Educación" icon="graduation">
+      {education.map(item => <EducationItem {...item} />)}
     </Section>
 
-    <!-- Technical Skills -->
-    <Section title="Habilidades Técnicas">
+    <Section title="Habilidades Técnicas" icon="code">
       {Object.entries(skills).map(([category, skillList]) => (
         <div>
           <h4 class="font-medium text-sm mb-2">{category}</h4>
           <div class="flex flex-wrap gap-2">
-            {skillList.map(skill => (
-              <Pill icon={skill.icon}>
-                {skill.name}
-              </Pill>
-            ))}
+            {skillList.map(skill => <Pill icon={skill.icon}>{skill.name}</Pill>)}
           </div>
         </div>
       ))}
     </Section>
 
-    <!-- Soft Skills -->
-    <Section title="Competencias Blandas">
+    <Section title="Competencias Blandas" icon="users">
       <ul class="list-disc list-inside text-sm text-muted-foreground space-y-1">
         {softSkills.map(skill => <li>{skill}</li>)}
       </ul>
     </Section>
-
   </div>
 </Layout>
