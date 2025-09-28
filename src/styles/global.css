@@ -75,13 +75,21 @@
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
+  /* --color-primary: var(--primary); */
+  /* SE CAMBIAN POR THEME DE DAISY UI
+  ESTOS COLORES LOS USO EN EL THEME SELECTOR, 
+  CAMBIARLOS AFECTA SU COLOR
+  bg-primary
+  bg-secondary
+  bg-accent
+  bg-neutral
+  */
   --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
+  /* --color-secondary: var(--secondary); */
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
+  /* --color-accent: var(--accent); */
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-border: var(--border);
@@ -126,14 +134,10 @@
   --muted: var(--color-neutral, var(--muted-fallback));
   --muted-foreground: var(--color-neutral-content, var(--muted-foreground-fallback));
   */
-  --muted: light-dark(
-    var(--color-neutral),
-    oklch(0.274 0.006 286.033)
-  );
-  --muted-foreground: light-dark(
-    oklch(0.552 0.016 285.938),
-    var(--color-neutral-content)
-  );
+  --muted: light-dark(var(--color-neutral),
+      oklch(0.274 0.006 286.033));
+  --muted-foreground: light-dark(oklch(0.552 0.016 285.938),
+      var(--color-neutral-content));
 
   --accent: var(--color-accent);
   --accent-foreground: var(--color-accent-content);
