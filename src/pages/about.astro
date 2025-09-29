@@ -1,130 +1,135 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import { aboutContent } from "@lib/content";
 import { Image } from "astro:assets";
 import { Button } from "@components/ui/button";
-import {
-  Award,
-  BookOpen,
-  Code,
-  Rocket,
-  MessageSquare,
-  type LucideIcon,
-} from "lucide-react";
-
-interface Achievement {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-}
-
-const achievements: Achievement[] = [
-  {
-    icon: Award,
-    title: "Open Source Contributor",
-    description:
-      "Actively contributing to the Astro documentation and various community projects.",
-  },
-  {
-    icon: Rocket,
-    title: "Project Launch: AstroVerse",
-    description:
-      "Successfully launched a personal project showcasing advanced Astro features and integrations.",
-  },
-  {
-    icon: BookOpen,
-    title: "Tech Talk: Modern Frontend",
-    description:
-      "Presented a talk on performance patterns in modern web development at a local meetup.",
-  },
-];
+import { Badge } from "@components/ui/badge";
+import { MessageSquare } from "lucide-astro";
+import AnimatedSection from "@components/motion/AnimatedSection.astro";
 ---
 
 <Layout>
   <main class="container mx-auto p-6 md:p-12">
-    <!-- Hero Section -->
-    <section
-      id="intro"
-      class="flex flex-col items-center text-center mb-16 md:mb-24"
-      transition:animate="fade"
-    >
-      <div
-        class="w-24 h-24 md:w-32 md:h-32 rounded-full bg-base-300 mb-6 flex items-center justify-center"
-      >
-        <!-- Placeholder for a profile image, e.g., <Image src={...} alt="Franco Maidana" class="rounded-full" /> -->
-        <span class="text-sm text-muted-foreground">Avatar</span>
-      </div>
-      <h1 class="text-4xl md:text-6xl font-bold mb-2">Franco Maidana</h1>
-      <!-- <div class="flex items-center gap-x-3 text-primary-content bg-primary/85  w-fit rounded-md"> -->
-      <h2
-        class="text-lg sm:text-xl  text-primary-content bg-primary/85 py-2 px-4 rounded-md mb-4"
-      >
-        Web Developer
-      </h2>
-      <p class="text-lg text-muted-foreground max-w-2xl">
-        Passionate about creating fast, accessible, and future-proof web
-        experiences.
-      </p>
-    </section>
+    <div class="space-y-24 md:space-y-32">
 
-    <!-- Personal Philosophy Section -->
-    <section
-      id="philosophy"
-      class="mb-16 md:mb-24 max-w-3xl mx-auto"
-      transition:animate="fade"
-    >
-      <article class="prose prose-lg lg:prose-xl dark:prose-invert text-center">
-        <p>
-          I believe the web should be a universal platform, accessible to
-          everyone. My passion lies in building digital experiences that are not
-          just visually appealing, but also incredibly fast and easy to use. I'm
-          driven by the challenge of optimizing for performance, ensuring every
-          byte and every millisecond counts.
-        </p>
-        <p>
-          For me, modern frontend development is about more than just frameworks
-          and libraries; it's about a commitment to quality and a user-first
-          mindset. I thrive on exploring new tools like Astro and leveraging the
-          latest web standards to create sites that feel effortless and are
-          built to last.
-        </p>
-      </article>
-    </section>
+      <!-- 1. Hero Section -->
+      <AnimatedSection client:visible>
+        <section id="hero" class="text-center">
+          <h1 class="text-5xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+            {aboutContent.hero.name}
+          </h1>
+          <p class="text-lg md:text-xl text-muted-foreground mb-2">{aboutContent.hero.role}</p>
+          <p class="text-sm text-muted-foreground mb-6">{aboutContent.hero.origin}</p>
+          <div class="w-32 h-32 rounded-full bg-base-300 mx-auto mb-6 flex items-center justify-center">
+            <span class="text-xs text-muted-foreground">Avatar</span>
+          </div>
+          <p class="text-xl md:text-2xl max-w-3xl mx-auto font-light">
+            {aboutContent.hero.tagline}
+          </p>
+        </section>
+      </AnimatedSection>
 
-    <!-- Achievements Section -->
-    <section id="achievements" class="mb-16 md:mb-24" transition:animate="fade">
-      <h2 class="text-3xl font-bold text-center mb-12">
-        Highlights & Recognitions
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {
-          achievements.map((item) => (
-            <div class="card bg-base-200 shadow-xl transition-transform duration-300 hover:-translate-y-1">
-              <div class="card-body items-center text-center">
-                <item.icon className="w-10 h-10 mb-4 text-primary" />
-                <h3 class="card-title">{item.title}</h3>
-                <p class="text-base-content/70">{item.description}</p>
-              </div>
+      <!-- 2. Personal Story -->
+      <AnimatedSection client:visible>
+        <section id="story">
+          <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">{aboutContent.story.title}</h2>
+          <article class="prose prose-lg lg:prose-xl dark:prose-invert mx-auto text-center space-y-4">
+            {aboutContent.story.paragraphs.map(p => <p>{p}</p>)}
+          </article>
+        </section>
+      </AnimatedSection>
+
+      <!-- 3. Academic Background -->
+      <AnimatedSection client:visible>
+        <section id="academics">
+          <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">{aboutContent.academics.title}</h2>
+          <div class="max-w-4xl mx-auto space-y-8">
+            <div class="flex flex-col md:flex-row gap-8">
+              {aboutContent.academics.education.map(edu => (
+                <div class="card bg-base-200 flex-1">
+                  <div class="card-body items-center text-center">
+                    <edu.icon client:load className="w-10 h-10 mb-4 text-primary" />
+                    <h3 class="card-title">{edu.degree}</h3>
+                    <p>{edu.institution}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))
-        }
-      </div>
-    </section>
+            <p class="text-center text-muted-foreground italic max-w-3xl mx-auto">
+              {aboutContent.academics.description}
+            </p>
+          </div>
+        </section>
+      </AnimatedSection>
 
-    <!-- Call-to-Action Section -->
-    <section id="cta" class="text-center" transition:animate="fade">
-      <h2 class="text-3xl font-bold mb-4">
-        Let's Build Something Great Together
-      </h2>
-      <p class="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
-        I'm currently available for freelance projects and collaborative
-        opportunities. Have a project in mind? I'd love to hear about it.
-      </p>
-      <a href="/contact">
-        <Button size="lg" className="btn-primary">
-          <MessageSquare className="w-5 h-5 mr-2" />
-          Get in Touch
-        </Button>
-      </a>
-    </section>
+      <!-- 4. Achievements -->
+      <AnimatedSection client:visible>
+        <section id="achievements">
+          <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">{aboutContent.achievements.title}</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {aboutContent.achievements.items.map(item => (
+              <div class="card bg-base-200 shadow-lg">
+                <div class="card-body">
+                  <div class="flex items-center gap-4">
+                    <item.icon client:load class="w-8 h-8 text-primary" />
+                    <div>
+                      <h3 class="card-title">{item.title}</h3>
+                      <p class="text-base-content/70">{item.description}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </AnimatedSection>
+
+      <!-- 5. Values & Philosophy -->
+      <AnimatedSection client:visible>
+        <section id="philosophy">
+          <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">{aboutContent.philosophy.title}</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {aboutContent.philosophy.values.map(value => (
+              <div class="card bg-base-200 text-center">
+                <div class="card-body">
+                  <h3 class="card-title justify-center">{value.title}</h3>
+                  <p class="text-base-content/70">"{value.description}"</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </AnimatedSection>
+
+      <!-- 6. Fun Facts -->
+      <AnimatedSection client:visible>
+        <section id="fun-facts" class="text-center">
+          <h2 class="text-3xl md:text-4xl font-bold mb-8">{aboutContent.funFacts.title}</h2>
+          <div class="flex flex-wrap justify-center items-center gap-8">
+            {aboutContent.funFacts.facts.map(fact => (
+              <div class="flex items-center gap-3 p-3 bg-base-200 rounded-box">
+                <fact.icon client:load className="w-6 h-6 text-primary" />
+                <span>{fact.text}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      </AnimatedSection>
+
+      <!-- 7. Call-to-Action -->
+      <AnimatedSection client:visible>
+        <section id="cta" class="text-center bg-base-200 p-8 md:p-16 rounded-box">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">{aboutContent.cta.title}</h2>
+          <p class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+            {aboutContent.cta.description}
+          </p>
+          <Button as="a" href="/contact" size="lg" className="btn-primary">
+            <MessageSquare className="w-5 h-5 mr-2" />
+            {aboutContent.cta.buttonText}
+          </Button>
+        </section>
+      </AnimatedSection>
+
+    </div>
   </main>
 </Layout>
