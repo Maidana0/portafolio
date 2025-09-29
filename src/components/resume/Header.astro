@@ -5,50 +5,60 @@
  * It's designed to be data-driven, receiving all necessary information via props.
  */
 
-import { Mail, Phone, Github, Linkedin, MapPin } from 'lucide-react';
+import { Instagram, Github, Linkedin, MapPin } from "lucide-react";
 
 interface Props {
   name: string;
   role: string;
   location: string;
-  email: string;
-  github: string;
   linkedin: string;
-  phone: string;
+  github: string;
+  instagram: string;
 }
 
-const { name, role, location, email, github, linkedin, phone } = Astro.props;
+const { name, role, location, github, linkedin, instagram } = Astro.props;
 ---
 
-<header class="flex flex-col md:flex-row justify-between items-start mb-10">
+<header class="flex flex-col sm:flex-row justify-between items-start">
   <!-- Left Column: Name and Role -->
   <div class="mb-4 md:mb-0">
     <h1 class="text-4xl font-bold">{name}</h1>
     <p class="text-lg text-muted-foreground">{role}</p>
     <p class="text-sm text-muted-foreground flex items-center mt-2">
-      <MapPin class="inline-block w-4 h-4 mr-2" />
+      <MapPin className="inline-block size-4 mr-1" />
       {location}
     </p>
   </div>
 
   <!-- Right Column: Contact Info -->
-  <div class="text-sm text-right">
-    <a href=`mailto:${email}` class="flex items-center justify-end mb-1 hover:text-primary">
-      {email}
-      <Mail class="inline-block w-4 h-4 ml-2" />
+  <div class="text-sm text-right flex sm:flex-col gap-1 sm:gap-2">
+    <a
+      href={linkedin}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items-center justify-end mb-1 hover:text-primary"
+    >
+      <span class="sm:block hidden">LinkedIn</span>
+      <Linkedin className="inline-block size-5 sm:size-4 ml-2" />
     </a>
-    <a href={github} target="_blank" rel="noopener noreferrer" class="flex items-center justify-end mb-1 hover:text-primary">
-      GitHub
-      <Github class="inline-block w-4 h-4 ml-2" />
+    <a
+      href={github}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items-center justify-end mb-1 hover:text-primary"
+    >
+      <span class="sm:block hidden">GitHub</span>
+      <Github className="inline-block size-5 sm:size-4 ml-2" />
     </a>
-    <a href={linkedin} target="_blank" rel="noopener noreferrer" class="flex items-center justify-end mb-1 hover:text-primary">
-      LinkedIn
-      <Linkedin class="inline-block w-4 h-4 ml-2" />
+    <a
+      href={instagram}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items-center justify-end mb-1 hover:text-primary"
+    >
+      <span class="sm:block hidden">Instagram</span>
+      <Instagram className="inline-block size-5 sm:size-4 ml-2" />
     </a>
-    <p class="flex items-center justify-end">
-      {phone}
-      <Phone class="inline-block w-4 h-4 ml-2" />
-    </p>
   </div>
 </header>
-<hr class="my-6" />
+<div class="my-8 h-0.5 bg-base-content/50 rounded-xl"/>

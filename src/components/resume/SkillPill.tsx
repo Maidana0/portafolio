@@ -17,10 +17,9 @@ import {
 } from "react-icons/si";
 import { DiScrum } from "react-icons/di";
 import { VscTypeHierarchy } from "react-icons/vsc";
-import { Bolt } from "lucide-react";
-import type { SkillIcon } from '@/pages/resume.astro';
+import { AiFillThunderbolt } from "react-icons/ai";
 
-const ICON_MAP: Record<SkillIcon, typeof FaReact> = {
+const ICON_MAP: Record<string, typeof FaReact> = {
   'react': FaReact,
   'nextjs': SiNextdotjs,
   'vite': SiVite,
@@ -41,14 +40,14 @@ const ICON_MAP: Record<SkillIcon, typeof FaReact> = {
   'git': FaGitAlt,
   'github': FaGithub,
   'postman': SiPostman,
-  'thunderclient': Bolt,
+  'thunderclient': AiFillThunderbolt,
   'scrum': DiScrum,
   'mvc': VscTypeHierarchy,
 };
 
 interface SkillPillProps {
   name: string;
-  icon: SkillIcon;
+  icon: string;
   colorClasses: string;
 }
 
@@ -60,7 +59,7 @@ const SkillPill: FC<SkillPillProps> = ({ name, icon, colorClasses }) => {
     <Tooltip>
       <TooltipTrigger asChild>
         <div className={cn(baseClasses, colorClasses)}>
-          {IconComponent && <IconComponent className="size-5" />}
+          {IconComponent && <IconComponent className="size-5 sm:size-7" />}
           <span className="sr-only">{name}</span>
         </div>
       </TooltipTrigger>
