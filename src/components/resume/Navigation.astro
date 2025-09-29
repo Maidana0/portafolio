@@ -15,12 +15,11 @@ const navigationItems = [
   { name: "Habilidades", href: "#skills" },
   { name: "Competencias", href: "#soft-skills" },
 ];
+
+const { items = navigationItems } = Astro.props;
 ---
 
-<FloatingNavigation 
-  client:load
-  items={navigationItems}
-/>
+<FloatingNavigation client:load items={items} />
 
 <style>
   /* Smooth scrolling with respect for motion preferences */
@@ -70,11 +69,11 @@ const navigationItems = [
       border-color: hsl(var(--border));
       border-width: 2px;
     }
-    
+
     .bg-background\/55 {
       background-color: hsl(var(--background));
     }
-    
+
     .shadow-2xl {
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
     }
@@ -85,7 +84,7 @@ const navigationItems = [
     [id] {
       scroll-margin-top: 1rem;
     }
-    
+
     .fixed.right-0 {
       right: 0.5rem;
     }
@@ -94,7 +93,7 @@ const navigationItems = [
     [role="menuitem"] {
       min-height: 44px;
     }
-    
+
     /* Larger focus indicators on mobile */
     .focus\:ring-2:focus {
       --tw-ring-offset-width: 3px;
@@ -107,7 +106,7 @@ const navigationItems = [
       animation-duration: 0.01ms !important;
       transition-duration: 0.01ms !important;
     }
-    
+
     html {
       scroll-behavior: auto;
     }
@@ -115,7 +114,8 @@ const navigationItems = [
     /* Remove transform animations that might cause motion sickness */
     .transition-transform,
     .transition-all {
-      transition-property: opacity, background-color, border-color, color, fill, stroke !important;
+      transition-property: opacity, background-color, border-color, color, fill,
+        stroke !important;
     }
   }
 
@@ -124,7 +124,7 @@ const navigationItems = [
     .bg-background\/55 {
       background-color: hsl(var(--background) / 0.9);
     }
-    
+
     .border-border\/40 {
       border-color: hsl(var(--border) / 0.6);
     }
@@ -155,13 +155,13 @@ const navigationItems = [
       position: static !important;
       transform: none !important;
     }
-    
+
     nav[role="navigation"] {
       border: 1px solid #000;
       padding: 1rem;
       margin: 1rem 0;
     }
-    
+
     nav[role="navigation"]::before {
       content: "Navegación del CV:";
       font-weight: bold;
@@ -183,7 +183,7 @@ const navigationItems = [
     .focus\:ring-2:focus {
       outline: 2px solid ButtonText;
     }
-    
+
     [aria-current="location"] {
       background: Highlight !important;
       color: HighlightText !important;
@@ -200,16 +200,16 @@ const navigationItems = [
   .overflow-y-auto::-webkit-scrollbar {
     width: 8px;
   }
-  
+
   .overflow-y-auto::-webkit-scrollbar-track {
     background: hsl(var(--muted) / 0.1);
   }
-  
+
   .overflow-y-auto::-webkit-scrollbar-thumb {
     background: hsl(var(--muted-foreground) / 0.3);
     border-radius: 4px;
   }
-  
+
   .overflow-y-auto::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--muted-foreground) / 0.5);
   }
