@@ -1,10 +1,10 @@
-import { Award, BookOpen, Code, Dumbbell, GraduationCap, Heart, Rocket } from "lucide-react";
+import { Award, BookOpen, Code, Dumbbell, GraduationCap, Heart, Rocket } from "lucide-astro";
 
 export const aboutContent = {
   hero: {
     name: "Franco Maidana",
     origin: "Buenos Aires, Argentina",
-    role: "Frontend Engineer specialized in Astro",
+    role: "Web Developer & Tech Enthusiast",
     tagline: "Transforming ideas into scalable, fast, and human-centered web experiences.",
   },
   story: {
@@ -20,12 +20,12 @@ export const aboutContent = {
       {
         degree: "Tecnicatura en Desarrollo Web",
         institution: "Universidad Nacional de La Matanza",
-        icon: GraduationCap,
+        Icon: GraduationCap,
       },
       {
         degree: "Profesorado en Educación Física",
         institution: "Universidad Nacional de La Matanza (Almost Graduated)",
-        icon: Dumbbell,
+        Icon: Dumbbell,
       },
     ],
     description: "My diverse academic background in both technology and physical education has equipped me with a unique blend of discipline, teamwork, and adaptability, which I apply to every project.",
@@ -34,22 +34,22 @@ export const aboutContent = {
     title: "Achievements & Certifications",
     items: [
       {
-        icon: Award,
+        Icon: Award,
         title: "Open Source Contributor",
         description: "Actively contributing to the Astro documentation and various community projects.",
       },
       {
-        icon: Rocket,
+        Icon: Rocket,
         title: "Project Launch: AstroVerse",
         description: "Successfully launched a personal project showcasing advanced Astro features.",
       },
       {
-        icon: BookOpen,
+        Icon: BookOpen,
         title: "Tech Talk: Modern Frontend",
         description: "Presented a talk on performance patterns at a local developer meetup.",
       },
       {
-        icon: Code,
+        Icon: Code,
         title: "Advanced Astro Certification",
         description: "Completed an intensive course on advanced Astro development patterns.",
       },
@@ -76,15 +76,15 @@ export const aboutContent = {
     title: "When I'm Not Coding...",
     facts: [
       {
-        icon: Heart,
+        Icon: Heart,
         text: "I'm a huge fan of classic rock music.",
       },
       {
-        icon: Dumbbell,
+        Icon: Dumbbell,
         text: "I enjoy calisthenics and staying active.",
       },
       {
-        icon: BookOpen,
+        Icon: BookOpen,
         text: "I love reading about history and philosophy.",
       },
     ],
