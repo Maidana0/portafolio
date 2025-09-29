@@ -17,16 +17,13 @@ const SidebarProvider = ({ children, headerSlot, footerSlot, currentPath }: Prop
       currentPath={currentPath}
       style={{
         "--sidebar-width-icon": "3rem",
-        "--sidebar-width": "calc(var(--spacing) * 72)",
+        "--sidebar-width": "calc(var(--spacing) * 70)",
       } as React.CSSProperties}>
       <AppSidebar />
 
       <SidebarInset >
         <header className="flex h-19 shrink-0 align-middle content-center items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-16 px-4 justify-between sticky top-0 z-10">
           <SidebarTrigger className="-ml-1 bg-neutral text-neutral-content" />
-          {/* <p className="text-lg font-semibold block md:hidden rounded-md bg-primary text-primary-foreground px-2 py-1">
-            Franco Maidana
-          </p> */}
           {headerSlot}
         </header>
 

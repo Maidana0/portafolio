@@ -1,11 +1,14 @@
 ---
 // src/components/resume/Navigation.astro
 /**
- * Renders a set of navigation links to allow users to jump to different sections of the resume.
- * This component is designed to be placed at the top of the resume for easy access.
+ * Simple floating navigation component that adapts to both desktop and mobile.
+ * Uses hover on desktop and touch/click on mobile with the same arrow design.
  */
 
-const sections = [
+import FloatingNavigation from "./NavigationMenu";
+
+// Simple navigation items array
+const navigationItems = [
   { name: "Perfil", href: "#profile" },
   { name: "Experiencia", href: "#experience" },
   { name: "Educación", href: "#education" },
@@ -14,13 +17,42 @@ const sections = [
 ];
 ---
 
-<nav class="flex justify-center flex-wrap gap-x-4 gap-y-2 mb-8">
-  {sections.map(section => (
-    <a
-      href={section.href}
-      class="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200"
-    >
-      {section.name}
-    </a>
-  ))}
-</nav>
+<FloatingNavigation 
+  client:load
+  items={navigationItems}
+/>
+
+<style>
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Section targeting */
+  [id] {
+    scroll-margin-top: 2rem;
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    [id] {
+      scroll-margin-top: 1rem;
+    }
+    
+    .fixed.right-0 {
+      right: 0.5rem;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    
+    html {
+      scroll-behavior: auto;
+    }
+  }
+</style>
