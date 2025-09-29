@@ -1,12 +1,118 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "@layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { Button } from "@components/ui/button";
+import { Badge } from "@components/ui/badge";
+import {
+  Award,
+  BookOpen,
+  Code,
+  Rocket,
+  MessageSquare,
+  type LucideIcon,
+} from "lucide-astro";
+
+interface Achievement {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+const achievements: Achievement[] = [
+  {
+    icon: Award,
+    title: "Open Source Contributor",
+    description: "Actively contributing to the Astro documentation and various community projects.",
+  },
+  {
+    icon: Rocket,
+    title: "Project Launch: AstroVerse",
+    description: "Successfully launched a personal project showcasing advanced Astro features and integrations.",
+  },
+  {
+    icon: BookOpen,
+    title: "Tech Talk: Modern Frontend",
+    description: "Presented a talk on performance patterns in modern web development at a local meetup.",
+  },
+];
 ---
 
 <Layout>
-  <div class="p-6">
-    <h1 class="text-3xl font-bold mb-4">Sobre mí</h1>
-    <p class="text-muted-foreground">
-      Información sobre tu experiencia y habilidades como desarrollador.
-    </p>
-  </div>
+  <main class="container mx-auto p-6 md:p-12">
+    <!-- Hero Section -->
+    <section
+      id="intro"
+      class="flex flex-col items-center text-center mb-16 md:mb-24"
+      transition:animate="fade"
+    >
+      <div class="w-24 h-24 md:w-32 md:h-32 rounded-full bg-base-300 mb-6 flex items-center justify-center">
+        <!-- Placeholder for a profile image, e.g., <Image src={...} alt="Franco Maidana" class="rounded-full" /> -->
+        <span class="text-sm text-muted-foreground">Avatar</span>
+      </div>
+      <h1 class="text-4xl md:text-6xl font-bold mb-2">
+        Franco Maidana
+      </h1>
+      <h2 class="text-xl md:text-2xl text-primary mb-4">
+        Frontend Engineer specialized in Astro
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-2xl">
+        Passionate about creating fast, accessible, and future-proof web experiences.
+      </p>
+    </section>
+
+    <!-- Personal Philosophy Section -->
+    <section
+      id="philosophy"
+      class="mb-16 md:mb-24 max-w-3xl mx-auto"
+      transition:animate="fade"
+    >
+      <article class="prose prose-lg lg:prose-xl dark:prose-invert text-center">
+        <p>
+          I believe the web should be a universal platform, accessible to everyone. My passion lies in building digital experiences that are not just visually appealing, but also incredibly fast and easy to use. I'm driven by the challenge of optimizing for performance, ensuring every byte and every millisecond counts.
+        </p>
+        <p>
+          For me, modern frontend development is about more than just frameworks and libraries; it's about a commitment to quality and a user-first mindset. I thrive on exploring new tools like Astro and leveraging the latest web standards to create sites that feel effortless and are built to last.
+        </p>
+      </article>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="mb-16 md:mb-24" transition:animate="fade">
+      <h2 class="text-3xl font-bold text-center mb-12">
+        Highlights & Recognitions
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          achievements.map((item) => (
+            <div class="card bg-base-200 shadow-xl transition-transform duration-300 hover:-translate-y-1">
+              <div class="card-body items-center text-center">
+                <item.icon class="w-10 h-10 mb-4 text-primary" />
+                <h3 class="card-title">{item.title}</h3>
+                <p class="text-base-content/70">{item.description}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section id="cta" class="text-center" transition:animate="fade">
+      <h2 class="text-3xl font-bold mb-4">
+        Let's Build Something Great Together
+      </h2>
+      <p class="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
+        I'm currently available for freelance projects and collaborative opportunities. Have a project in mind? I'd love to hear about it.
+      </p>
+      <Button
+        as="a"
+        href="/contact"
+        size="lg"
+        className="btn-primary"
+      >
+        <MessageSquare class="w-5 h-5 mr-2" />
+        Get in Touch
+      </Button>
+    </section>
+  </main>
 </Layout>
