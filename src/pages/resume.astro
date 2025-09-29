@@ -35,7 +35,8 @@ const education = [
     degree: "Desarrollador Web Full Stack",
     institution: "Coderhouse",
     date: "2022 - 2024",
-    details: "Desarrollo Web, JavaScript, React. Backend con JavaScript y TypeScript (Node.js / Express). Python / Django.",
+    details:
+      "Desarrollo Web, JavaScript, React. Backend con JavaScript y TypeScript (Node.js / Express). Python / Django.",
   },
   {
     degree: "Bachiller En Economía Y Administración",
@@ -49,7 +50,9 @@ const experience = [
     role: "Cotzia: Gestión de materia prima y costos",
     company: "Organización Simulada - Foo Talent Group",
     date: "2025",
-    description: ["Gestión de materia prima y costos de laboratorio. (Next.js 15, TypeScript, Tailwind, Shadcn, Zustand, RHF)"],
+    description: [
+      "Gestión de materia prima y costos de laboratorio. (Next.js 15, TypeScript, Tailwind, Shadcn, Zustand, RHF)",
+    ],
   },
   {
     role: "Proyectos Colaborativos",
@@ -66,12 +69,14 @@ const experience = [
     role: "MaidaVision (Proyecto Personal)",
     company: "En progreso",
     date: "Actual",
-    description: ["App para gestión de películas/series con APIs externas (TheMovieDB, YouTube). Autenticación con NextAuth (Google/GitHub) y base de datos con Prisma + SQLite. Validaciones con Zod + RHF, manejo de estados globales con Zustand. Interfaz desarrollada en Tailwind + Shadcn."],
+    description: [
+      "App para gestión de películas/series con APIs externas (TheMovieDB, YouTube). Autenticación con NextAuth (Google/GitHub) y base de datos con Prisma + SQLite. Validaciones con Zod + RHF, manejo de estados globales con Zustand. Interfaz desarrollada en Tailwind + Shadcn.",
+    ],
   },
 ];
 
 // Color palette definition for skill categories
-const SKILL_COLORS = {
+const SKILL_COLORS: Record<string, string> = {
   Frontend: "bg-blue-100 text-blue-800 hover:bg-blue-200",
   Backend: "bg-green-100 text-green-800 hover:bg-green-200",
   "Bases de Datos": "bg-yellow-100 text-yellow-800 hover:bg-yellow-200",
@@ -80,30 +85,64 @@ const SKILL_COLORS = {
   Herramientas: "bg-gray-100 text-gray-800 hover:bg-gray-200",
 };
 
-const skills = {
+export type SkillIcon =
+  | "nextjs"
+  | "react"
+  | "vite"
+  | "tailwind"
+  | "shadcn"
+  | "material-ui"
+  | "nodejs"
+  | "express"
+  | "nestjs"
+  | "sql"
+  | "sqlite"
+  | "sequelize"
+  | "prisma"
+  | "mongodb"
+  | "figma"
+  | "styled-components"
+  | "sass"
+  | "scrum"
+  | "mvc"
+  | "git"
+  | "postman"
+  | "thunderclient"
+  | "github";
+
+const skills: Record<string, { name: string; icon: SkillIcon }[]> = {
   Frontend: [
-    { name: "Next.js", icon: "nextjs" }, { name: "React", icon: "react" },
-    { name: "Vite", icon: "vite" }, { name: "TailwindCSS", icon: "tailwind" },
-    { name: "Shadcn/UI", icon: "shadcn" }, { name: "Material UI", icon: "material-ui" },
+    { name: "Next.js", icon: "nextjs" },
+    { name: "React", icon: "react" },
+    { name: "Vite", icon: "vite" },
+    { name: "TailwindCSS", icon: "tailwind" },
+    { name: "Shadcn/UI", icon: "shadcn" },
+    { name: "Material UI", icon: "material-ui" },
   ],
   Backend: [
-    { name: "Node.js", icon: "nodejs" }, { name: "Express", icon: "express" },
+    { name: "Node.js", icon: "nodejs" },
+    { name: "Express", icon: "express" },
     { name: "NestJS (básico)", icon: "nestjs" },
   ],
   "Bases de Datos": [
-    { name: "SQL", icon: "sql" }, { name: "SQLite", icon: "sqlite" },
-    { name: "Sequelize", icon: "sequelize" }, { name: "Prisma", icon: "prisma" },
+    { name: "SQL", icon: "sql" },
+    { name: "SQLite", icon: "sqlite" },
+    { name: "Sequelize", icon: "sequelize" },
+    { name: "Prisma", icon: "prisma" },
     { name: "MongoDB", icon: "mongodb" },
   ],
   Diseño: [
-    { name: "Figma", icon: "figma" }, { name: "Styled Components", icon: "styled-components" },
+    { name: "Figma", icon: "figma" },
+    { name: "Styled Components", icon: "styled-components" },
     { name: "Sass", icon: "sass" },
   ],
   Metodologías: [
-    { name: "SCRUM", icon: "scrum" }, { name: "MVC", icon: "mvc" },
+    { name: "SCRUM", icon: "scrum" },
+    { name: "MVC", icon: "mvc" },
   ],
   Herramientas: [
-    { name: "Git/GitHub", icon: "git" }, { name: "Postman", icon: "postman" },
+    { name: "Git/GitHub", icon: "git" },
+    { name: "Postman", icon: "postman" },
     { name: "ThunderClient", icon: "thunderclient" },
   ],
 };
@@ -125,47 +164,59 @@ const softSkills = [
       <p class="text-sm text-muted-foreground">{professionalProfile}</p>
     </Section>
 
-    <Section id="experience" title="Experiencia en Equipo y Proyectos Relevantes" icon="briefcase">
-      {experience.map(item => (
-        <ExperienceItem role={item.role} company={item.company} date={item.date}>
-          <ul class="list-disc list-inside space-y-1">
-            {item.description.map(point => (
-              <li set:html={point} />
-            ))}
-          </ul>
-        </ExperienceItem>
-      ))}
+    <Section
+      id="experience"
+      title="Experiencia en Equipo y Proyectos Relevantes"
+      icon="briefcase"
+    >
+      {
+        experience.map((item) => (
+          <ExperienceItem
+            role={item.role}
+            company={item.company}
+            date={item.date}
+          >
+            <ul class="list-disc list-inside space-y-1">
+              {item.description.map((point) => (
+                <li set:html={point} />
+              ))}
+            </ul>
+          </ExperienceItem>
+        ))
+      }
     </Section>
 
     <Section id="education" title="Educación" icon="graduation">
-      {education.map(item => <EducationItem {...item} />)}
+      {education.map((item) => <EducationItem {...item} />)}
     </Section>
 
     <Section id="skills" title="Habilidades Técnicas" icon="code">
       <TooltipProvider client:load>
         <div class="space-y-4">
-          {Object.entries(skills).map(([category, skillList]) => (
-            <div>
-              <h4 class="font-medium text-sm mb-2">{category}</h4>
-              <div class="flex flex-wrap gap-2">
-                {skillList.map(skill => (
-                  <SkillPill
-                    client:visible
-                    name={skill.name}
-                    icon={skill.icon}
-                    colorClasses={SKILL_COLORS[category]}
-                  />
-                ))}
+          {
+            Object.entries(skills).map(([category, skillList]) => (
+              <div>
+                <h4 class="font-medium text-sm mb-2">{category}</h4>
+                <div class="flex flex-wrap gap-2">
+                  {skillList.map((skill) => (
+                    <SkillPill
+                      client:visible
+                      name={skill.name}
+                      icon={skill.icon}
+                      colorClasses={SKILL_COLORS[category]}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </TooltipProvider>
     </Section>
 
     <Section id="soft-skills" title="Competencias Blandas" icon="users">
       <ul class="list-disc list-inside text-sm text-muted-foreground space-y-1">
-        {softSkills.map(skill => <li>{skill}</li>)}
+        {softSkills.map((skill) => <li>{skill}</li>)}
       </ul>
     </Section>
   </div>

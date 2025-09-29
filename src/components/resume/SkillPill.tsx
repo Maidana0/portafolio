@@ -1,4 +1,4 @@
-import React from 'react';
+import { type FC } from 'react';
 import {
   Tooltip,
   TooltipContent,
@@ -18,40 +18,41 @@ import {
 import { DiScrum } from "react-icons/di";
 import { VscTypeHierarchy } from "react-icons/vsc";
 import { Bolt } from "lucide-react";
+import type { SkillIcon } from '@/pages/resume.astro';
 
-const ICON_MAP = {
-  react: FaReact,
-  nextjs: SiNextdotjs,
-  vite: SiVite,
-  tailwind: SiTailwindcss,
+const ICON_MAP: Record<SkillIcon, typeof FaReact> = {
+  'react': FaReact,
+  'nextjs': SiNextdotjs,
+  'vite': SiVite,
+  'tailwind': SiTailwindcss,
   'material-ui': SiMui,
-  shadcn: SiShadcnui,
-  nodejs: FaNodeJs,
-  express: SiExpress,
-  nestjs: SiNestjs,
-  sql: FaDatabase,
-  sqlite: SiSqlite,
-  sequelize: SiSequelize,
-  prisma: SiPrisma,
-  mongodb: SiMongodb,
-  figma: FaFigma,
+  'shadcn': SiShadcnui,
+  'nodejs': FaNodeJs,
+  'express': SiExpress,
+  'nestjs': SiNestjs,
+  'sql': FaDatabase,
+  'sqlite': SiSqlite,
+  'sequelize': SiSequelize,
+  'prisma': SiPrisma,
+  'mongodb': SiMongodb,
+  'figma': FaFigma,
   'styled-components': SiStyledcomponents,
-  sass: FaSass,
-  git: FaGitAlt,
-  github: FaGithub,
-  postman: SiPostman,
-  thunderclient: Bolt,
-  scrum: DiScrum,
-  mvc: VscTypeHierarchy,
+  'sass': FaSass,
+  'git': FaGitAlt,
+  'github': FaGithub,
+  'postman': SiPostman,
+  'thunderclient': Bolt,
+  'scrum': DiScrum,
+  'mvc': VscTypeHierarchy,
 };
 
 interface SkillPillProps {
   name: string;
-  icon: keyof typeof ICON_MAP;
+  icon: SkillIcon;
   colorClasses: string;
 }
 
-const SkillPill: React.FC<SkillPillProps> = ({ name, icon, colorClasses }) => {
+const SkillPill: FC<SkillPillProps> = ({ name, icon, colorClasses }) => {
   const IconComponent = ICON_MAP[icon];
   const baseClasses = "flex items-center justify-center rounded-full p-2 text-xs font-semibold leading-5 transition-colors duration-200";
 

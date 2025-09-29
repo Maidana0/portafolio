@@ -8,17 +8,18 @@
  * @param {string} title - The title to be displayed for the section.
  * @param {string} [icon] - An optional icon name to display next to the title.
  */
-import Icon from './Icon.astro';
+import Icon from "./Icon.astro";
 
 interface Props {
   title: string;
   icon?: string;
+  id?: string;
 }
 
-const { title, icon } = Astro.props;
+const { title, icon, id } = Astro.props;
 ---
 
-<section class="space-y-4">
+<section class="space-y-4" id={id}>
   <div class="flex items-center gap-x-3">
     {icon && <Icon name={icon} />}
     <h2 class="text-xl font-semibold text-primary">{title}</h2>
