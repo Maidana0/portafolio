@@ -1,13 +1,13 @@
 ---
 // src/components/resume/Navigation.astro
 /**
- * Simple floating navigation component that adapts to both desktop and mobile.
- * Uses hover on desktop and touch/click on mobile with the same arrow design.
+ * Accessible floating navigation component that adapts to both desktop and mobile.
+ * Includes full keyboard navigation, screen reader support, and ARIA compliance.
  */
 
 import FloatingNavigation from "./NavigationMenu";
 
-// Simple navigation items array
+// Navigation items with accessible structure
 const navigationItems = [
   { name: "Perfil", href: "#profile" },
   { name: "Experiencia", href: "#experience" },
@@ -23,17 +23,64 @@ const navigationItems = [
 />
 
 <style>
-  /* Smooth scrolling */
+  /* Smooth scrolling with respect for motion preferences */
   html {
     scroll-behavior: smooth;
   }
 
-  /* Section targeting */
+  /* Screen reader only utility class */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Ensure all sections have proper landmarks */
   [id] {
     scroll-margin-top: 2rem;
   }
 
-  /* Mobile optimizations */
+  /* Enhanced focus indicators */
+  .focus\:ring-2:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+
+  .focus\:ring-primary:focus {
+    --tw-ring-color: hsl(var(--primary));
+  }
+
+  .focus\:ring-offset-2:focus {
+    --tw-ring-offset-width: 2px;
+  }
+
+  .focus\:ring-inset:focus {
+    --tw-ring-inset: inset;
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .border-border\/40 {
+      border-color: hsl(var(--border));
+      border-width: 2px;
+    }
+    
+    .bg-background\/55 {
+      background-color: hsl(var(--background));
+    }
+    
+    .shadow-2xl {
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
+    }
+  }
+
+  /* Mobile optimizations with accessibility */
   @media (max-width: 768px) {
     [id] {
       scroll-margin-top: 1rem;
@@ -42,9 +89,19 @@ const navigationItems = [
     .fixed.right-0 {
       right: 0.5rem;
     }
+
+    /* Ensure touch targets are at least 44px */
+    [role="menuitem"] {
+      min-height: 44px;
+    }
+    
+    /* Larger focus indicators on mobile */
+    .focus\:ring-2:focus {
+      --tw-ring-offset-width: 3px;
+    }
   }
 
-  /* Reduced motion support */
+  /* Reduced motion preferences */
   @media (prefers-reduced-motion: reduce) {
     * {
       animation-duration: 0.01ms !important;
@@ -54,5 +111,112 @@ const navigationItems = [
     html {
       scroll-behavior: auto;
     }
+
+    /* Remove transform animations that might cause motion sickness */
+    .transition-transform,
+    .transition-all {
+      transition-property: opacity, background-color, border-color, color, fill, stroke !important;
+    }
+  }
+
+  /* Dark mode accessibility improvements */
+  @media (prefers-color-scheme: dark) {
+    .bg-background\/55 {
+      background-color: hsl(var(--background) / 0.9);
+    }
+    
+    .border-border\/40 {
+      border-color: hsl(var(--border) / 0.6);
+    }
+
+    /* Ensure sufficient contrast in dark mode */
+    .text-muted-foreground {
+      color: hsl(var(--muted-foreground) / 0.9);
+    }
+  }
+
+  /* Focus management for screen readers */
+  [aria-hidden="true"] {
+    display: none;
+  }
+
+  /* Ensure live regions are accessible */
+  [aria-live] {
+    position: absolute !important;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  /* Print styles for accessibility */
+  @media print {
+    .fixed {
+      position: static !important;
+      transform: none !important;
+    }
+    
+    nav[role="navigation"] {
+      border: 1px solid #000;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+    
+    nav[role="navigation"]::before {
+      content: "Navegación del CV:";
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    [role="menuitem"] {
+      display: block !important;
+      opacity: 1 !important;
+      transform: none !important;
+      position: static !important;
+      margin: 0.25rem 0;
+    }
+  }
+
+  /* Windows High Contrast Mode support */
+  @media (prefers-contrast: high) {
+    .focus\:ring-2:focus {
+      outline: 2px solid ButtonText;
+    }
+    
+    [aria-current="location"] {
+      background: Highlight !important;
+      color: HighlightText !important;
+    }
+  }
+
+  /* Ensure keyboard navigation is visible */
+  .focus\:outline-none:focus {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  /* Custom scrollbar for better accessibility */
+  .overflow-y-auto::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .overflow-y-auto::-webkit-scrollbar-track {
+    background: hsl(var(--muted) / 0.1);
+  }
+  
+  .overflow-y-auto::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 4px;
+  }
+  
+  .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+
+  /* Ensure sufficient contrast for focus indicators */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
   }
 </style>
