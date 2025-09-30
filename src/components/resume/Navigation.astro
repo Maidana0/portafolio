@@ -15,11 +15,12 @@ const navigationItems = [
   { name: "Habilidades", href: "#skills" },
   { name: "Competencias", href: "#soft-skills" },
 ];
-
-const { items = navigationItems } = Astro.props;
 ---
 
-<FloatingNavigation client:load items={items} />
+<FloatingNavigation
+  client:load
+  items={navigationItems}
+/>
 
 <style>
   /* Smooth scrolling with respect for motion preferences */
@@ -114,8 +115,7 @@ const { items = navigationItems } = Astro.props;
     /* Remove transform animations that might cause motion sickness */
     .transition-transform,
     .transition-all {
-      transition-property: opacity, background-color, border-color, color, fill,
-        stroke !important;
+      transition-property: opacity, background-color, border-color, color, fill, stroke !important;
     }
   }
 

@@ -1,0 +1,57 @@
+---
+import { Eye } from "lucide-astro";
+
+export interface Props {
+  title: string;
+  description: string;
+  thumbnailBg?: string;
+  modalId: string;
+}
+
+const {
+  title,
+  description,
+  thumbnailBg = 'bg-base-300',
+  modalId
+} = Astro.props;
+---
+
+<div class="card card-compact bg-base-200 shadow-md transition-transform duration-300 hover:-translate-y-1">
+  <figure class:list={["h-48 w-full", thumbnailBg]}>
+    <!-- Placeholder for actual image -->
+    <div class="flex items-center justify-center h-full w-full">
+      <span class="text-base-content/50">Image Preview</span>
+    </div>
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title">{title}</h2>
+    <div class="card-actions justify-end">
+      <label for={modalId} class="btn btn-primary btn-sm">
+        <Eye class="w-4 h-4" />
+        View
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Implementation -->
+<input type="checkbox" id={modalId} class="modal-toggle" />
+<div class="modal modal-bottom sm:modal-middle" role="dialog">
+  <div class="modal-box w-11/12 max-w-4xl">
+    <h3 class="font-bold text-2xl mb-4">{title}</h3>
+
+    <figure class:list={["h-96 w-full rounded-lg", thumbnailBg]}>
+      <!-- Placeholder for actual image in modal -->
+      <div class="flex items-center justify-center h-full w-full">
+        <span class="text-base-content/50 text-xl">Full Image</span>
+      </div>
+    </figure>
+
+    <p class="py-4 text-base-content/80">{description}</p>
+
+    <div class="modal-action">
+      <label for={modalId} class="btn">Close</label>
+    </div>
+  </div>
+  <label class="modal-backdrop" for={modalId}>Close</label>
+</div>

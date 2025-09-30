@@ -5,7 +5,7 @@
  * It's designed to be data-driven, receiving all necessary information via props.
  */
 
-import { Instagram, Github, Linkedin, MapPin } from "lucide-astro";
+import { Instagram, Github, Linkedin, MapPin } from "lucide-react";
 
 interface Props {
   name: string;
@@ -39,7 +39,7 @@ const { name, role, location, github, linkedin, instagram } = Astro.props;
       class="flex items-center justify-end mb-1 hover:text-primary"
     >
       <span class="sm:block hidden">LinkedIn</span>
-      <Linkedin class="inline-block size-5 sm:size-4 ml-2" />
+      <Linkedin className="inline-block size-5 sm:size-4 ml-2" />
     </a>
     <a
       href={github}
@@ -48,7 +48,7 @@ const { name, role, location, github, linkedin, instagram } = Astro.props;
       class="flex items-center justify-end mb-1 hover:text-primary"
     >
       <span class="sm:block hidden">GitHub</span>
-      <Github class="inline-block size-5 sm:size-4 ml-2" />
+      <Github className="inline-block size-5 sm:size-4 ml-2" />
     </a>
     <a
       href={instagram}
@@ -57,7 +57,7 @@ const { name, role, location, github, linkedin, instagram } = Astro.props;
       class="flex items-center justify-end mb-1 hover:text-primary"
     >
       <span class="sm:block hidden">Instagram</span>
-      <Instagram class="inline-block size-5 sm:size-4 ml-2" />
+      <Instagram className="inline-block size-5 sm:size-4 ml-2" />
     </a>
   </div>
 </header>

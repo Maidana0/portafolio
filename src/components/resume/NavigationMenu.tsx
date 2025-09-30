@@ -276,7 +276,7 @@ export default function FloatingNavigation({ items }: FloatingNavigationProps) {
                 aria-current={isActive ? 'location' : undefined}
                 tabIndex={isOpen ? 0 : -1}
               >
-                <span className="font-medium text-sm flex-1 text-left truncate">
+                <span className="font-medium text-sm flex-1 text-left">
                   {item.name}
                 </span>
                 <ChevronLeft
