@@ -1,5 +1,4 @@
 ---
-// src/pages/resume.astro
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/resume/Header.astro";
 import Section from "@components/resume/Section.astro";
@@ -10,7 +9,6 @@ import SkillPill from "@components/resume/SkillPill.tsx";
 import { TooltipProvider } from "@components/ui/tooltip";
 import { resumeNavigation } from "@data/resume/navigation";
 import { resumeContent, SKILL_COLORS } from "@data/resume/content";
-// --- sections icons ---
 import {
   FaUser,
   FaBriefcase,
@@ -18,71 +16,74 @@ import {
   FaCode,
   FaUsers,
 } from "react-icons/fa";
-// --- Data & Color Definitions ---
-const {
-  personalInfo,
-  professionalProfile,
-  experience,
-  education,
-  skills,
-  softSkills,
-} = resumeContent;
 ---
 
-<Layout>
-  <div class="p-6 max-w-4xl mx-auto space-y-8">
-    <Header {...personalInfo} />
-    <Navigation items={resumeNavigation} />
+<Layout mainClassName="container mx-auto my-6 md:my-12 px-6 md:px-12">
+  <Navigation items={resumeNavigation} slot="outMainSlot" />
 
-    <Section
-      id="profile"
-      title="Perfil Profesional"
-      Icon={FaUser}
-      className="space-y-1"
-    >
-      {
-        professionalProfile.map((paragraph) => (
-          <p class="text-muted-foreground text-sm sm:text-base">{paragraph}</p>
-        ))
-      }
-    </Section>
+  <!-- Header Section -->
+  <Header {...resumeContent.personalInfo} />
 
-    <Section
-      id="experience"
-      title="Experiencia en Equipo y Proyectos Relevantes"
-      Icon={FaBriefcase}
-    >
-      {
-        experience.map((item) => (
-          <ExperienceItem
-            role={item.role}
-            company={item.company}
-            date={item.date}
-          >
-            <ul class="list-disc list-inside space-y-1">
-              {item.description.map((point) => (
-                <li set:html={point} />
-              ))}
-            </ul>
-          </ExperienceItem>
-        ))
-      }
-    </Section>
+  <!-- Profile Section -->
+  <Section
+    id="profile"
+    title={resumeContent.professionalProfile.title}
+    Icon={FaUser}
+    className="space-y-4"
+  >
+    {
+      resumeContent.professionalProfile.paragraphs.map((paragraph) => (
+        <p class="text-muted-foreground text-sm sm:text-base leading-relaxed">
+          {paragraph}
+        </p>
+      ))
+    }
+  </Section>
 
-    <Section id="education" title="Educación" Icon={FaGraduationCap}>
-      {education.map((item) => <EducationItem {...item} />)}
-    </Section>
+  <!-- Experience Section -->
+  <Section
+    id="experience"
+    title={resumeContent.experience.title}
+    Icon={FaBriefcase}
+  >
+    {
+      resumeContent.experience.items.map((item) => (
+        <ExperienceItem
+          role={item.role}
+          company={item.company}
+          date={item.date}
+        >
+          <ul class="list-disc list-inside space-y-2">
+            {item.description.map((point) => (
+              <li class="text-sm sm:text-base" set:html={point} />
+            ))}
+          </ul>
+        </ExperienceItem>
+      ))
+    }
+  </Section>
 
-    <Section id="skills" title="Habilidades Técnicas" Icon={FaCode}>
-      <TooltipProvider client:load>
-        <div class="space-y-4">
-          {
-            Object.entries(skills).map(([category, skillList]) => (
-              <div>
-                <h4 class="font-medium text-sm sm:text-base mb-2">
+  <!-- Education Section -->
+  <Section
+    id="education"
+    title={resumeContent.education.title}
+    Icon={FaGraduationCap}
+  >
+    {resumeContent.education.items.map((item) => <EducationItem {...item} />)}
+  </Section>
+
+  <!-- Skills Section -->
+  <Section id="skills" title={resumeContent.skills.title} Icon={FaCode}>
+    <TooltipProvider client:load>
+      <div class="space-y-6">
+        {
+          Object.entries(resumeContent.skills.items).map(
+            ([category, skillList]) => (
+              <div class="space-y-3">
+                <h4 class="font-semibold text-base sm:text-lg text-foreground">
                   {category}
                 </h4>
-                <div class="flex flex-wrap gap-2 px-2">
+                <div class="flex flex-wrap gap-2">
                   {skillList.map((skill) => (
                     <SkillPill
                       client:visible
@@ -93,20 +94,32 @@ const {
                   ))}
                 </div>
               </div>
-            ))
-          }
-        </div>
-      </TooltipProvider>
-    </Section>
+            )
+          )
+        }
+      </div>
+    </TooltipProvider>
+  </Section>
 
-    <Section id="soft-skills" title="Competencias Blandas" Icon={FaUsers}>
-      <ul
-        class="list-disc list-inside text-sm sm:text-base text-muted-foreground space-y-1"
-      >
-        {softSkills.map((skill) => <li>{skill}</li>)}
-      </ul>
-    </Section>
-  </div>
+  <!-- Soft Skills Section -->
+  <Section
+    id="soft-skills"
+    title={resumeContent.softSkills.title}
+    Icon={FaUsers}
+  >
+    <ul class="space-y-3">
+      {
+        resumeContent.softSkills.items.map((skill) => (
+          <li class="flex items-start gap-3">
+            <span class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+            <span class="text-sm sm:text-base text-muted-foreground">
+              {skill}
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
 </Layout>
 <style>
   .sr-only {

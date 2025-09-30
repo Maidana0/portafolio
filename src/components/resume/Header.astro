@@ -19,7 +19,7 @@ interface Props {
 const { name, role, location, github, linkedin, instagram } = Astro.props;
 ---
 
-<header class="flex flex-col sm:flex-row justify-between items-start">
+<header class="flex flex-col sm:flex-row justify-between items-start" id={"header"}>
   <!-- Left Column: Name and Role -->
   <div class="mb-4 md:mb-0">
     <h1 class="text-4xl font-bold">{name}</h1>
@@ -61,4 +61,4 @@ const { name, role, location, github, linkedin, instagram } = Astro.props;
     </a>
   </div>
 </header>
-<div class="my-8 h-0.5 bg-base-content/50 rounded-xl"/>
+<div class="mt-8 mb-2 h-0.5 bg-base-content/50 rounded-xl"/>

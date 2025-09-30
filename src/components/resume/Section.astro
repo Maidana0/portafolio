@@ -22,8 +22,10 @@ interface Props {
 const { title, Icon, id, containerClassName, className } = Astro.props;
 ---
 
-<section class={cn("space-y-4", containerClassName)} id={id}>
-  <div class="flex items-center gap-x-3 text-primary-content bg-primary/85 py-1.5 px-3 w-fit rounded-md">
+<section class={cn("space-y-4 pt-8 md:pt-16", containerClassName)} id={id}>
+  <div
+    class="flex items-center gap-x-3 text-primary-content bg-primary/85 py-1.5 px-3 w-fit rounded-md"
+  >
     {Icon && <Icon className="size-5" />}
     <h2 class="text-lg sm:text-xl font-semibold">{title}</h2>
   </div>

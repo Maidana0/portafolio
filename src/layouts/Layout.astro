@@ -3,6 +3,9 @@ import "@styles/global.css";
 import ThemeSelector from "@components/common/layout/ThemeSelector.astro";
 import SidebarProvider from "@providers/sidebar-provider";
 import { ViewTransitions } from "astro:transitions";
+import { cn } from "@lib/utils";
+
+const { mainClassName = "" } = Astro.props;
 ---
 
 <!doctype html>
@@ -26,9 +29,11 @@ import { ViewTransitions } from "astro:transitions";
     <SidebarProvider currentPath={Astro.url.pathname} client:load>
       <ThemeSelector slot="headerSlot" />
 
-      <main>
+      <main class={cn("min-h-screen", mainClassName)}>
         <slot />
       </main>
+
+      <slot name="outMainSlot" />
 
       <footer class="p-4 text-center mt-auto" slot="footerSlot">
         <span
