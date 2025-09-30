@@ -1,5 +1,5 @@
 ---
-// src/components/resume/Navigation.astro
+// src/components/common/Navigation.astro
 /**
  * Accessible floating navigation component that adapts to both desktop and mobile.
  * Includes full keyboard navigation, screen reader support, and ARIA compliance.
@@ -8,15 +8,8 @@
 import FloatingNavigation from "./NavigationMenu";
 
 // Navigation items with accessible structure
-const navigationItems = [
-  { name: "Perfil", href: "#profile" },
-  { name: "Experiencia", href: "#experience" },
-  { name: "Educación", href: "#education" },
-  { name: "Habilidades", href: "#skills" },
-  { name: "Competencias", href: "#soft-skills" },
-];
 
-const { items = navigationItems } = Astro.props;
+const { items } = Astro.props;
 ---
 
 <FloatingNavigation client:load items={items} />
